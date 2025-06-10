@@ -1,61 +1,54 @@
-import { useState } from "react";
-import FormularioAlumno from "./formularioAlumnos";
+import { useNavigate } from "react-router-dom";
 
-const ListaAlumnos = () => {
-  const [alumnos, setAlumnos] = useState([
-    {
-      lu: "APU00999",
-      nombre: "María Eugenia",
-      apellido: "Diaz",
-      curso: "Tercero",
-      email: "mariadiaz@mail.com",
-    },
-    {
-      lu: "APU01000",
-      nombre: "Juan Carlos",
-      apellido: "Pérez",
-      curso: "Segundo",
-      email: "juanperez@mail.com",
-    },
-  ]);
+const ListaAlumnos = ({ alumnos, setAlumnoSeleccionado, eliminarAlumno }) => {
+  const navigate = useNavigate();
 
-  const [alumnoSeleccionado, setAlumnoSeleccionado] = useState(null);
-
-  const guardarAlumno = (nuevo) => {
-    const existe = alumnos.some((a) => a.lu === nuevo.lu);
-    if (existe) {
-      setAlumnos(alumnos.map((a) => (a.lu === nuevo.lu ? nuevo : a)));
-      setAlumnoSeleccionado(null);
-    } else {
-      setAlumnos([...alumnos, nuevo]);
-    }
-  };
-
-  const eliminarAlumno = (lu) => {
-    if (confirm("¿Deseas eliminar este alumno?")) {
-      setAlumnos(alumnos.filter((a) => a.lu !== lu));
-    }
+  const handleEditar = (alumno) => {
+    setAlumnoSeleccionado(alumno);
+    navigate("/nuevo-alumno"); // Navegar al formulario para editar
   };
 
   return (
     <div>
-      <FormularioAlumno
-        onGuardar={guardarAlumno}
-        alumnoSeleccionado={alumnoSeleccionado}
-        cancelar={() => setAlumnoSeleccionado(null)}
-      />
       <h2 style={{ color: "#424242" }}>Lista de Alumnos</h2>
+      <button
+        onClick={() => {
+          setAlumnoSeleccionado(null);
+          navigate("/nuevo-alumno"); // Navegar al formulario para agregar
+        }}
+        style={styles.btnPrimary}
+      >
+        Agregar Alumno
+      </button>
+
       <div style={styles.cardContainer}>
         {alumnos.map((alumno) => (
           <div key={alumno.lu} style={styles.card}>
-            <h3 style={styles.cardTitle}>{alumno.nombre} {alumno.apellido}</h3>
-            <p><strong>LU:</strong> {alumno.lu}</p>
-            <p><strong>Curso:</strong> {alumno.curso}</p>
-            <p><strong>Email:</strong> {alumno.email}</p>
+            <h3 style={styles.cardTitle}>
+              {alumno.nombre} {alumno.apellido}
+            </h3>
+            <p>
+              <strong>LU:</strong> {alumno.lu}
+            </p>
+            <p>
+              <strong>Curso:</strong> {alumno.curso}
+            </p>
+            <p>
+              <strong>Email:</strong> {alumno.email}
+            </p>
             <div style={styles.cardButtons}>
-              <button onClick={() => alert(`Ver detalles de ${alumno.nombre}`)} style={styles.btnNeutral}>Ver</button>
-              <button onClick={() => setAlumnoSeleccionado(alumno)} style={styles.btnPrimary}>Editar</button>
-              <button onClick={() => eliminarAlumno(alumno.lu)} style={styles.btnDanger}>Eliminar</button>
+              <button
+                onClick={() => alert(`Ver detalles de ${alumno.nombre}`)}
+                style={styles.btnNeutral}
+              >
+                Ver
+              </button>
+              <button onClick={() => handleEditar(alumno)} style={styles.btnPrimary}>
+                Editar
+              </button>
+              <button onClick={() => eliminarAlumno(alumno.lu)} style={styles.btnDanger}>
+                Eliminar
+              </button>
             </div>
           </div>
         ))}
