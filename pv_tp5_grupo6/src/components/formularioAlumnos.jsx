@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+
 const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
   const [alumno, setAlumno] = useState({
     lu: "",
@@ -8,8 +9,6 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
     curso: "",
     email: "",
   });
-
-  const [formDirection, setFormDirection] = useState("row");
 
   useEffect(() => {
     if (alumnoSeleccionado) {
@@ -25,16 +24,6 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
     }
   }, [alumnoSeleccionado]);
 
-  // Lógica responsive
-  useEffect(() => {
-    const handleResize = () => {
-      setFormDirection(window.innerWidth < 600 ? "column" : "row");
-    };
-    handleResize(); // correr al montar
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAlumno({ ...alumno, [name]: value });
@@ -42,33 +31,31 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!onGuardar || typeof onGuardar !== "function") {
+      console.error("No se recibió la función onGuardar");
+      return;
+    }
     if (alumno.lu && alumno.nombre && alumno.apellido) {
       onGuardar(alumno);
-      setAlumno({
-        lu: "",
-        nombre: "",
-        apellido: "",
-        curso: "",
-        email: "",
-      });
     } else {
       alert("Completá los campos obligatorios.");
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
       <h3 style={styles.formTitle}>
         {alumnoSeleccionado ? "Editar Alumno" : "Agregar Alumno"}
       </h3>
-      <div style={{ ...styles.formRow, flexDirection: formDirection }}>
+      <div style={styles.formRow}>
         <input
           name="lu"
           placeholder="LU"
           value={alumno.lu}
           onChange={handleChange}
           required
-          disabled={alumnoSeleccionado}
+          disabled={!!alumnoSeleccionado}
           style={styles.input}
         />
         <input
@@ -134,7 +121,6 @@ const styles = {
     gap: "1rem",
     flexDirection: "row",
   },
-
   input: {
     padding: "0.5rem",
     flex: "1 1 200px",
