@@ -36,6 +36,13 @@ function App() {
     }
   };
 
+  const eliminarAlumno = (lu) => {
+    const confirmado = window.confirm("¿Estás seguro de eliminar este alumno?");
+    if (confirmado) {
+      setAlumnos(alumnos.filter((a) => a.lu !== lu));
+    }
+  };
+
   return (
     <Router>
       <NavBar />
@@ -48,6 +55,7 @@ function App() {
               <ListaAlumnos
                 alumnos={alumnos}
                 setAlumnoSeleccionado={setAlumnoSeleccionado}
+                eliminarAlumno={eliminarAlumno}
               />
             }
           />
