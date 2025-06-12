@@ -4,6 +4,7 @@ import ListaAlumnos from "./components/listaAlumnos";
 import FormularioAlumno from "./components/formularioAlumnos"; 
 import Acerca from "./views/Acerca";
 import Home from "./views/home"; 
+import DetallesAlumnos from "./components/detalleAlumno";
 import { useState } from "react";
 
 function App() {
@@ -68,6 +69,10 @@ function App() {
                 setAlumnoSeleccionado={setAlumnoSeleccionado}
               />
             }
+          />
+          <Route
+            path="/alumno/:lu"
+            element={<DetallesAlumnos alumnos={alumnos} />}
           />
           <Route path="/acerca" element={<Acerca />} />
           <Route path="*" element={<Navigate to="/home" />} />

@@ -37,11 +37,11 @@ const ListaAlumnos = ({ alumnos, setAlumnoSeleccionado, eliminarAlumno }) => {
               <strong>Email:</strong> {alumno.email}
             </p>
             <div style={styles.cardButtons}>
-              <button
-                onClick={() => alert(`Ver detalles de ${alumno.nombre}`)}
-                style={styles.btnNeutral}
+             <button
+              onClick={() => navigate(`/alumno/${alumno.lu}`)}
+              style={styles.btnNeutral}
               >
-                Ver
+              Ver
               </button>
               <button onClick={() => handleEditar(alumno)} style={styles.btnPrimary}>
                 Editar
