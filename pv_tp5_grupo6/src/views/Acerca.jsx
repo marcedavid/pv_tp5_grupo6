@@ -3,7 +3,11 @@ const Acerca = () => {
     <div style={{ maxWidth: 600, margin: "2rem auto", padding: "1rem", fontFamily: "Arial, sans-serif" }}>
       <h2 style={{ color: "#333" }}>Acerca de esta aplicación</h2>
       <p>
-       --
+       Esta aplicación web, desarrollada con React y Vite, permite gestionar un conjunto de datos de alumnos 
+      con las funcionalidades de agregar, editar, eliminar y visualizar detalles específicos de cada alumno. 
+      La interfaz está organizada en componentes funcionales de manera eficiente y ofrecen una navegación fluida
+      mediante React Router DOM. Además, incorpora un menú de navegación general accesible desde todas las vistas. 
+      El proyecto está versionado con Git y alojado en GitHub, siguiendo el manejo de ramas y documentación colaborativa.
       </p>
 
       <h3 style={{ marginTop: "1.5rem", color: "#555" }}>Integrantes del grupo</h3>
