@@ -23,7 +23,9 @@ const DetallesAlumnos = ({ alumnos }) => {
       <p><strong>LU:</strong> {alumno.lu}</p>
       <p><strong>Curso:</strong> {alumno.curso}</p>
       <p><strong>Email:</strong> {alumno.email}</p>
-      <button onClick={() => navigate("/lista-alumnos")} style={{ 
+      <p><strong>Dirección:</strong> {alumno.direccion}</p>
+      <p><strong>Teléfono:</strong> {alumno.telefono}</p>
+       <button onClick={() => navigate("/lista-alumnos")} style={{ 
         backgroundColor: "#1976d2",
         color: "white",
         border: "none",

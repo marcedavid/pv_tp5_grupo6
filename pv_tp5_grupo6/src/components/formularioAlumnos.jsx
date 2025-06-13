@@ -8,6 +8,8 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
     apellido: "",
     curso: "",
     email: "",
+    direccion: "",
+    telefono: "",
   });
 
   useEffect(() => {
@@ -20,6 +22,8 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
         apellido: "",
         curso: "",
         email: "",
+        direccion: "",
+        telefono: "",
       });
     }
   }, [alumnoSeleccionado]);
@@ -88,6 +92,20 @@ const FormularioAlumno = ({ onGuardar, alumnoSeleccionado, cancelar }) => {
           onChange={handleChange}
           style={styles.input}
         />
+        <input
+        name="direccion"
+        placeholder="Dirección"
+        value={alumno.direccion}
+        onChange={handleChange}
+        style={styles.input}
+      />
+      <input
+        name="telefono"
+        placeholder="Teléfono"
+        value={alumno.telefono}
+        onChange={handleChange}
+        style={styles.input}
+      />
       </div>
       <div style={styles.buttonRow}>
         <button type="submit" style={styles.btnPrimary}>

@@ -15,6 +15,8 @@ function App() {
       apellido: "Diaz",
       curso: "Tercero",
       email: "mariadiaz@mail.com",
+      direccion: "San martin 801",
+      telefono: "388 1246356",
     },
     {
       lu: "APU01000",
@@ -22,6 +24,8 @@ function App() {
       apellido: "Pérez",
       curso: "Segundo",
       email: "juanperez@mail.com",
+      direccion: "Otero 455",
+      telefono: "388 3475965",
     },
   ]);
 
